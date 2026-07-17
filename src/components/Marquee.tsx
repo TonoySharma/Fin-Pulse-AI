@@ -1,85 +1,74 @@
 "use client";
 
 import React from "react";
+import FadeUp from "./FadeUp";
 
-const marqueeItems = [
-  {
-    title: "Autonomous AI Support",
-    category: "Customer Agent",
-    icon: "🤖",
-    status: "Active",
-    badge: "Featured",
-  },
-  {
-    title: "Code Review Assistant",
-    category: "Developer Tools",
-    icon: "⚡",
-    status: "Deploying",
-    badge: "Trending",
-  },
-  {
-    title: "Noise Canceling Headphones",
-    category: "Audio",
-    icon: "🎧",
-    status: "In Stock",
-    badge: "Best Seller",
-  },
-  {
-    title: "Smart Fitness Watch",
-    category: "Wearables",
-    icon: "⌚",
-    status: "In Stock",
-    badge: "Popular",
-  },
-  {
-    title: "Automated Workflow Agent",
-    category: "Productivity",
-    icon: "🚀",
-    status: "Active",
-    badge: "New",
-  },
-];
+const Marquee: React.FC = () => {
+  const items: string[] = [
+    "SMARTPHONE",
+    "5G FLAGSHIP",
+    "MOBILE ACCESSORIES",
+    "APPLE WORLD",
+    "ANDROID ZONE",
+    "GADGET STORE",
+    "NEXT-GEN TECH",
+    "ONLINE SHOP",
+    "SMART WATCH",
+    "PREMIUM DEVICES",
+    "TECH REPAIR",
+    "GAMING PHONE",
+    "GLOBAL EDITION",
+    "UNBEATABLE DEALS",
+    "FAST DELIVERY",
+  ];
 
-export default function Marquee() {
-  const doubleItems = [...marqueeItems, ...marqueeItems];
+  const StarIcon: React.FC = () => (
+    <span className="mx-4 text-xs text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] select-none animate-pulse">
+      ✦
+    </span>
+  );
 
   return (
-    <section className="w-full overflow-hidden py-2 bg-gray-50 border-y border-gray-200">
-      <div className="flex animate-marquee gap-4">
-        {doubleItems.map((item, index) => (
-          <div
-            key={index}
-            className="flex min-w-[240px] items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm hover:border-gray-300 transition-colors"
-          >
-            {/* Icon */}
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-gray-100 text-xl">
-              {item.icon}
+    <div className="relative w-full overflow-hidden bg-slate-950 py-6 border-y border-cyan-500/10 select-none">
+      {/* Left Fade Gradient */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
+      
+      {/* Right Fade Gradient */}
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
+
+      <FadeUp>
+        <div className="flex w-full overflow-hidden group">
+          <div className="flex whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused] items-center">
+            
+            {/* First Set */}
+            <div className="flex items-center shrink-0">
+              {items.map((item, index) => (
+                <div key={`tech1-${index}`} className="flex items-center">
+                  <span className="px-4 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 text-gray-300 font-sans text-xs tracking-[0.25em] font-bold uppercase transition-all duration-300 hover:text-cyan-400 hover:border-cyan-500/40 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] backdrop-blur-md">
+                    {item}
+                  </span>
+                  <StarIcon />
+                </div>
+              ))}
             </div>
 
-            {/* Details */}
-            <div className="flex flex-col overflow-hidden">
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-medium text-indigo-600">
-                  {item.category}
-                </span>
-                <span className="text-[10px] text-gray-400">•</span>
-                <span className="text-[10px] text-gray-500 font-medium">
-                  {item.badge}
-                </span>
-              </div>
-
-              <h4 className="truncate text-sm font-medium text-gray-800">
-                {item.title}
-              </h4>
-
-              <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-0.5">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                <span>{item.status}</span>
-              </div>
+            {/* Second Set (Duplicate for smooth infinite loop) */}
+            <div className="flex items-center shrink-0">
+              {items.map((item, index) => (
+                <div key={`tech2-${index}`} className="flex items-center">
+                  <span className="px-4 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 text-gray-300 font-sans text-xs tracking-[0.25em] font-bold uppercase transition-all duration-300 hover:text-cyan-400 hover:border-cyan-500/40 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] backdrop-blur-md">
+                    {item}
+                  </span>
+                  <StarIcon />
+                </div>
+              ))}
             </div>
+
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      </FadeUp>
+    </div>
   );
-}
+};
+
+export default Marquee;
