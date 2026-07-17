@@ -14,6 +14,7 @@ import {
     BsArrowRight
 } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
+import FadeUp from "./FadeUp";
 
 export const Footer = () => {
     const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ export const Footer = () => {
     return (
         <footer className="bg-slate-950 text-slate-300 border-t border-slate-800">
             {/* 1. Top Newsletter Bar */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-b border-slate-800/80">
+            <FadeUp className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 ">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800">
                     <div className="max-w-xl">
                         <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -69,14 +70,14 @@ export const Footer = () => {
                         )}
                     </form>
                 </div>
-            </div>
+            </FadeUp>
 
             {/* 2. Main Footer Links & Info */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+            <FadeUp className=" px-4 sm:px-6 lg:px-8 py-12 sm:py-16 border-t border-slate-800/80 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
                     {/* Brand Info */}
-                    <div className="lg:col-span-2 space-y-4">
+                    <div className=" space-y-4">
                         <Link href="/" className="flex items-center gap-2 group w-fit">
                             <div className="h-9 w-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shadow-indigo-600/30">
                                 F
@@ -222,10 +223,10 @@ export const Footer = () => {
                     </div>
 
                 </div>
-            </div>
+            </FadeUp>
 
             {/* 3. Bottom Bar */}
-            <div className="border-t border-slate-900 bg-slate-950/80 py-6">
+            <FadeUp className="border-t border-slate-900 bg-slate-950/80 py-6">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
                     <p>© {new Date().getFullYear()} FinAgent AI Inc. All rights reserved.</p>
 
@@ -241,7 +242,7 @@ export const Footer = () => {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </FadeUp>
         </footer>
     );
 };
