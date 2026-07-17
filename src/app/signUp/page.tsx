@@ -1,3 +1,4 @@
+import RegisterPage from '@/components/SignUoSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 const SignUpPage = () => {
     return (
         <div>
-            
+            <RegisterPage></RegisterPage>
         </div>
     );
 };

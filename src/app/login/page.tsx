@@ -1,3 +1,4 @@
+import LoginPage from '@/components/LogInSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 const LogInPage = () => {
     return (
         <div>
-            
+            <LoginPage></LoginPage>
         </div>
     );
 };
