@@ -168,11 +168,11 @@ const NavBar = () => {
 
                   <div className="space-y-1">
                     <Link
-                      href="/profile"
+                      href="/my-profile"
                       className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-indigo-50 hover:text-indigo-600 no-underline"
                     >
                       <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                      Profile Settings
+                      Profile
                     </Link>
 
                     <Link
@@ -212,13 +212,18 @@ const NavBar = () => {
                 </Link>
               </div>
             )}
+
           </div>
 
           {/* Mobile Hamburger Icon Button */}
           <button
             className="cursor-pointer rounded-2xl bg-gray-100/80 p-2.5 text-gray-700 hover:bg-gray-200/80 md:hidden transition-colors border-none"
             onClick={() => setIsMenuOpen(true)}
-            aria-label="Open menu">
+            aria-label="Open menu"
+          >
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
           </button>
         </div>
       </header>
@@ -240,7 +245,7 @@ const NavBar = () => {
             <div className="flex items-center justify-between pb-5 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  Fin<span className="text-indigo-600">Agent</span>
+                  Fin Agent
                 </span>
               </div>
               <button
@@ -286,7 +291,7 @@ const NavBar = () => {
                     My Orders
                   </NavLink>
 
-                  <NavLink href="/profile" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                  <NavLink href="/my-profile" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                     Profile
                   </NavLink>
                 </>
@@ -335,7 +340,7 @@ const NavBar = () => {
 
                 <Link href="/signUp" onClick={closeMobileMenu} className="no-underline">
                   <Button className="w-full cursor-pointer rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-100">
-                     <p className="flex items-center gap-2">Get Started <FaArrowRight /></p>
+                    <p className="flex items-center gap-2">Get Started <FaArrowRight /></p>
                   </Button>
                 </Link>
               </div>
