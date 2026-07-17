@@ -2,68 +2,65 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@heroui/react";
 import Image from "next/image";
-
-// import { authClient } from "@/lib/auth-client";
+import { Button } from "@heroui/react";
 import toast from "react-hot-toast";
+
+import { authClient } from "@/lib/auth-client";
 import NavLink from "./NavLink";
 
-
-
 const NavBar = () => {
-
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
-  // const { data: session } = authClient.useSession();
-
+  const { data: session } = authClient.useSession();
   const user = session?.user;
 
   const handleLogout = async () => {
-    // const { error } = await authClient.signOut();
+    const { error } = await authClient.signOut();
 
-    // if (error) {
-    //   toast.error(error.message || "Logout failed!");
-    //   return;
-    // }
+    if (error) {
+      toast.error(error.message || "Logout failed!");
+      return;
+    }
 
-    toast.success("Log Out successfully!");
-
-    // Force redirect
+    toast.success("Logged out successfully!");
     window.location.replace("/login");
   };
 
+  const closeMobileMenu = () => setIsMenuOpen(false);
 
   return (
-    <>
-      {/* 1. Full-width background + Sticky position */}
-      <nav className="sticky top-0 z-40 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md">
-        <div className="container mx-auto flex h-[75px] items-center justify-between px-6">
+    <div>
+      {/* Modern Floating/Sticky Glassmorphism Header */}
+      <header className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all">
+        <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-8">
 
-          {/* Left Side Logo - Gadget Marketplace Theme */}
+          {/* Glassmorphic Floating Logo */}
           <Link
-            href="/">
-            <div>
+            href="/"
+            className="group flex items-center gap-2.5 no-underline transition-all duration-300 hover:scale-[1.02] active:scale-95"
+          >
+            <div className="flex items-center gap-2.5 rounded-2xl border border-gray-200/60 bg-white/60 p-2 pr-4 shadow-[0_2px_10px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all group-hover:border-indigo-300 group-hover:bg-white/90 group-hover:shadow-md">
+              {/* Icon with Soft Gradient Glow */}
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 font-black text-white shadow-sm shadow-indigo-200 transition-transform duration-300 group-hover:rotate-6">
+                F
+              </div>
 
-              <Image
-                src="/icon.png"
-                alt="Gadget Mart Logo"
-                width={200}
-                height={200}
-                priority
-              />
+              {/* Brand Name */}
+              <div className="flex flex-col">
+                <span className="text-base font-extrabold tracking-tight text-gray-900 group-hover:text-indigo-600 transition-colors">
+                  Fin<span className="text-indigo-600">Agent</span>
+                </span>
+              </div>
             </div>
           </Link>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-5">
-            {/* Desktop Nav Links (Fully Responsive - hidden on mobile) */}
-            <ul className="hidden border border-gray-200 px-6 py-2 rounded-full items-center gap-6 font-medium bg-gray-50/50 md:flex list-none m-0">
-
+          {/* Desktop Navigation Links */}
+          <nav className="hidden items-center md:flex">
+            <ul className="flex items-center gap-1 rounded-2xl bg-gray-100/70 p-1.5 backdrop-blur-md border border-gray-200/50 list-none m-0 text-sm font-semibold text-gray-600">
               <li>
                 <NavLink
                   href="/"
-                  className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
+                  className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                 >
                   Home
                 </NavLink>
@@ -72,154 +69,182 @@ const NavBar = () => {
               <li>
                 <NavLink
                   href="/browse-products"
-                  className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
+                  className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline">
+                  Features
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  href="/categories"
+                  className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                 >
-                  Browse Products
+                  Categories
                 </NavLink>
               </li>
 
               <li>
                 <NavLink
                   href="/about-us"
-                  className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
+                  className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                 >
                   About Us
                 </NavLink>
               </li>
 
-
+              {/* Protected Links for Logged In User */}
               {session && user && (
                 <>
+                  <div className="h-4 w-[1px] bg-gray-300/60 mx-1" />
                   <li>
                     <NavLink
                       href="/add-product"
-                      className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
+                      className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                     >
                       Add Product
                     </NavLink>
                   </li>
+
                   <li>
                     <NavLink
                       href="/product-manage"
-                      className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
+                      className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                     >
-                      Manage Products
+                      Manage
                     </NavLink>
                   </li>
                 </>
               )}
             </ul>
+          </nav>
 
-            {/* Desktop Actions */}
-            <div className="hidden items-center gap-3 md:flex">
-              {user ? (
-                /* --- Modern Dropdown on Hover --- */
-                <div className="relative group py-2">
-                  <button className="flex items-center gap-2 focus:outline-none cursor-pointer bg-transparent border-none">
+          {/* Desktop Right Side Actions */}
+          <div className="hidden items-center gap-4 md:flex">
+            {user ? (
+              <div className="relative group py-2">
+                {/* Profile Pill Trigger */}
+                <button className="flex items-center gap-3 p-1.5 pr-3 rounded-full bg-gray-100/80 border border-gray-200/60 hover:bg-white hover:shadow-md hover:border-indigo-200 transition-all duration-300 cursor-pointer">
+                  <div className="relative">
                     {user.image ? (
                       <Image
-                        width={40}
-                        height={40}
+                        width={36}
+                        height={36}
                         src={user.image}
                         alt={user.name || "User profile"}
-                        className="h-10 w-10 rounded-full object-cover ring-2 ring-indigo-100 transition-all group-hover:ring-indigo-400"
+                        className="h-9 w-9 rounded-full object-cover ring-2 ring-indigo-500/20"
                       />
                     ) : (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 font-semibold text-white ring-2 ring-indigo-100 transition-all group-hover:ring-indigo-400">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 font-bold text-white shadow-sm">
                         {user.name?.charAt(0).toUpperCase() || "U"}
                       </div>
                     )}
-                    <svg
-                      className="h-4 w-4 text-gray-500 transition-transform duration-200 group-hover:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+                  </div>
+
+                  <span className="text-sm font-semibold text-gray-800 max-w-[100px] truncate">
+                    {user.name?.split(" ")[0]}
+                  </span>
+
+                  <svg
+                    className="h-4 w-4 text-gray-400 transition-transform duration-300 group-hover:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* Profile Floating Dropdown */}
+                <div className="absolute right-0 top-full mt-2 w-64 origin-top-right rounded-3xl border border-gray-100 bg-white/95 backdrop-blur-2xl p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 scale-90 pointer-events-none transition-all duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto z-50">
+                  <div className="p-3 bg-gradient-to-br from-indigo-50/50 to-purple-50/30 rounded-2xl mb-2 border border-indigo-50/50">
+                    <p className="text-[11px] font-bold tracking-wider uppercase text-indigo-600/80">Logged In</p>
+                    <p className="truncate text-sm font-bold text-gray-900 mt-0.5">{user.name}</p>
+                    {user.email && <p className="truncate text-xs text-gray-500">{user.email}</p>}
+                  </div>
+
+                  <div className="space-y-1">
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-indigo-50 hover:text-indigo-600 no-underline"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                      Profile Settings
+                    </Link>
 
-                  {/* Dropdown Menu */}
-                  <div className="absolute right-0 top-full mt-1 w-52 origin-top-right rounded-2xl border border-gray-100 bg-white p-2 shadow-xl opacity-0 scale-95 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto z-50">
-                    <div className="px-3 py-2.5 border-b border-gray-50">
-                      <p className="text-xs font-medium text-gray-400">Signed in as</p>
-                      <p className="truncate text-sm font-semibold text-gray-800">{user.name}</p>
-                      {user.email && <p className="truncate text-xs text-gray-500">{user.email}</p>}
-                    </div>
+                    <Link
+                      href="/orders"
+                      className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-indigo-50 hover:text-indigo-600 no-underline"
+                    >
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                      My Orders
+                    </Link>
 
-                    <div className="mt-1 space-y-3">
-                      <li>
-                        <NavLink
-                          href="/profile"
-                          className="block rounded-full border border-dashed font-medium px-4 py-2 text-sm text-gray-600 transition-all hover:bg-indigo-100"
-                        >
-                          Profile
-                        </NavLink>
-                      </li>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center rounded-full border border-dashed gap-2 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50/90 transition-colors cursor-pointer text-left  bg-transparent">
+                    <div className="my-1 border-t border-gray-100" />
 
-                        Log Out
-                      </button>
-                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-rose-600 transition-all hover:bg-rose-50 cursor-pointer border-none bg-transparent text-left"
+                    >
+                      <svg className="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                      Log Out
+                    </button>
                   </div>
                 </div>
-              ) : (
-                <>
-                  <Link href="/login" className="no-underline">
-                    <Button className="cursor-pointer rounded border bg-transparent px-4 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-indigo-50">
-                      Log In
-                    </Button>
-                  </Link>
+              </div>
+            ) : (
+              <div className="flex items-center gap-3">
+                <Link href="/login" className="no-underline">
+                  <Button className="cursor-pointer border rounded-2xl bg-transparent px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-all">
+                   Log In
+                  </Button>
+                </Link>
 
-                  <Link href="/signUp" className="no-underline">
-                    <Button className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm shadow-indigo-100 transition-all hover:bg-indigo-700 hover:shadow-md">
-                      Get Started →
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div>
-
-            {/* Mobile Hamburger Button */}
-            <button
-              className="cursor-pointer rounded-xl bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 md:hidden transition-colors border border-gray-100"
-              onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
-            >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+                <Link href="/signUp" className="no-underline">
+                  <Button className="cursor-pointer rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-200 hover:shadow-lg hover:shadow-indigo-300 hover:scale-[1.02] active:scale-95 transition-all">
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
+
+          {/* Mobile Hamburger Icon Button */}
+          <button
+            className="cursor-pointer rounded-2xl bg-gray-100/80 p-2.5 text-gray-700 hover:bg-gray-200/80 md:hidden transition-colors border-none"
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile Slider  */}
-      <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+      {/* Modern Slide-over Mobile Menu */}
+      <div className={`fixed inset-0 z-50 md:hidden transition-all duration-300 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
 
-        {/* Backdrop Overlay */}
+        {/* Dark Backdrop */}
         <div
-          className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
-          onClick={() => setIsMenuOpen(false)}
+          className="absolute inset-0 bg-gray-900/40 backdrop-blur-md transition-opacity"
+          onClick={closeMobileMenu}
         />
 
-        {/* Sidebar Panel */}
-        <div className={`absolute inset-y-0 left-0 w-4/5 max-w-sm bg-white p-6 shadow-2xl transition-transform duration-300 ease-out flex flex-col justify-between ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        {/* Drawer Panel */}
+        <div className={`absolute inset-y-0 right-0 w-full max-w-xs bg-white/95 backdrop-blur-2xl p-6 shadow-2xl transition-transform duration-300 ease-out flex flex-col justify-between ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
 
           <div>
-            {/* Sidebar Header */}
-            <div className="flex items-center justify-between pb-6 border-b border-gray-100">
-              <div className="flex items-center gap-2 font-bold text-lg text-gray-900">
-            
-                <span>Mobile Shop</span>
+            {/* Header */}
+            <div className="flex items-center justify-between pb-5 border-b border-gray-100">
+              <div className="flex items-center gap-2">
+                <span className="font-extrabold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  Gadget Mart
+                </span>
               </div>
-
-              {/* Close Button */}
               <button
-                className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors border-none bg-transparent"
-                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors border-none cursor-pointer"
+                onClick={closeMobileMenu}
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -227,63 +252,52 @@ const NavBar = () => {
               </button>
             </div>
 
-
-            <div className="flex flex-col gap-1.5 pt-6">
-              <NavLink href="/" onClick={() => setIsMenuOpen(false)} className="no-underline">
-                <Button className="w-full cursor-pointer rounded-xl bg-transparent px-4 py-3 text-left justify-start text-sm font-medium text-gray-600 transition-all hover:bg-indigo-50 hover:text-indigo-600">
-                  Home
-                </Button>
+            {/* Navigation Links */}
+            <nav className="flex flex-col gap-1 pt-6">
+              <NavLink href="/" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                Home
               </NavLink>
 
-              <NavLink href="/browse-products" onClick={() => setIsMenuOpen(false)} className="no-underline">
-                <Button className="w-full cursor-pointer rounded-xl bg-transparent px-4 py-3 text-left justify-start text-sm font-medium text-gray-600 transition-all hover:bg-indigo-50 hover:text-indigo-600">
-                  Browse Products
-                </Button>
+              <NavLink href="/browse-products" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                Browse Products
               </NavLink>
 
-              <NavLink href="/about-us" onClick={() => setIsMenuOpen(false)} className="no-underline">
-                <Button className="w-full cursor-pointer rounded-xl bg-transparent px-4 py-3 text-left justify-start text-sm font-medium text-gray-600 transition-all hover:bg-indigo-50 hover:text-indigo-600">
-                  About Us
-                </Button>
+              <NavLink href="/categories" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                Categories
+              </NavLink>
+
+              <NavLink href="/about-us" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                About Us
               </NavLink>
 
               {session && user && (
                 <>
-                  <li>
-                    <NavLink
-                      href="/add-product"
-                      className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
-                    >
-                      Add Product
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      href="/product-manage"
-                      className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
-                    >
-                      Manage Products
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      href="/profile"
-                      className="block rounded-full px-4 py-2 text-sm text-gray-600 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-sm no-underline"
-                    >
-                      Profile
-                    </NavLink>
-                  </li>
+                  <div className="my-2 border-t border-gray-100" />
+                  <NavLink href="/add-product" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                    Add Product
+                  </NavLink>
 
+                  <NavLink href="/product-manage" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                    Manage Products
+                  </NavLink>
+
+                  <NavLink href="/orders" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                    My Orders
+                  </NavLink>
+
+                  <NavLink href="/profile" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                    Profile
+                  </NavLink>
                 </>
               )}
-            </div>
+            </nav>
           </div>
 
-   
-          <div className="border-t border-gray-100 pt-4 flex flex-col gap-3">
+          {/* Mobile Footer Actions */}
+          <div className="border-t border-gray-100 pt-5">
             {user ? (
               <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3 px-2">
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl border border-gray-100">
                   {user.image ? (
                     <Image
                       width={40}
@@ -293,42 +307,43 @@ const NavBar = () => {
                       className="h-10 w-10 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500 font-semibold text-white">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 font-bold text-white">
                       {user.name?.charAt(0).toUpperCase() || "U"}
                     </div>
                   )}
-                  <div>
-                    <p className="text-sm font-semibold text-gray-800">{user.name}</p>
-                    {user.email && <p className="text-xs text-gray-500">{user.email}</p>}
+                  <div className="overflow-hidden">
+                    <p className="truncate text-sm font-bold text-gray-900">{user.name}</p>
+                    {user.email && <p className="truncate text-xs text-gray-500">{user.email}</p>}
                   </div>
                 </div>
+
                 <Button
                   onClick={handleLogout}
-                  className="w-full cursor-pointer rounded-xl bg-red-50 text-red-600 px-4 py-2.5 text-sm font-medium transition-all hover:bg-red-100 duration-300"
+                  className="w-full cursor-pointer rounded-2xl bg-rose-50 text-rose-600 font-semibold px-4 py-3 text-sm transition-all hover:bg-rose-100 border-none"
                 >
                   Log Out
                 </Button>
               </div>
             ) : (
-              <>
-                <Link href="/login" className="no-underline">
-                  <Button className="w-full cursor-pointer rounded border bg-transparent px-4 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-sky-200">
-                    Log In
+              <div className="flex flex-col gap-2.5">
+                <Link href="/login" onClick={closeMobileMenu} className="no-underline">
+                  <Button className="w-full cursor-pointer rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 shadow-sm">
+                   Log In
                   </Button>
                 </Link>
 
-                <Link href="/signUp" className="no-underline">
-                  <Button className="w-full cursor-pointer rounded bg-sky-500 px-4 py-2 text-sm font-medium text-white shadow-sm shadow-sky-100 transition-all hover:bg-sky-600 hover:shadow-md">
-                    Get Started →
+                <Link href="/signUp" onClick={closeMobileMenu} className="no-underline">
+                  <Button className="w-full cursor-pointer rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-100">
+                    Get Started
                   </Button>
                 </Link>
-              </>
+              </div>
             )}
           </div>
 
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
