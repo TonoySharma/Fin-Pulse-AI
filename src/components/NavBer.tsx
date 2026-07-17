@@ -30,9 +30,10 @@ const NavBar = () => {
   const closeMobileMenu = () => setIsMenuOpen(false);
 
   return (
-    <div>
+    <div className="sticky top-0 z-50">
       {/* Modern Floating/Sticky Glassmorphism Header */}
-      <header className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all">
+      <header className="w-full bg-white/70 backdrop-blur-xl border-b
+       border-gray-200/50 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all">
         <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-8">
 
           {/* Glassmorphic Floating Logo */}
@@ -70,18 +71,9 @@ const NavBar = () => {
 
               <li>
                 <NavLink
-                  href="/browse-products"
+                  href="/all-features"
                   className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline">
                   Features
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  href="/categories"
-                  className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
-                >
-                  Categories
                 </NavLink>
               </li>
 
@@ -98,6 +90,15 @@ const NavBar = () => {
               {session && user && (
                 <>
                   <div className="h-4 w-[1px] bg-gray-300/60 mx-1" />
+                  <li>
+                    <NavLink
+                      href="/categories"
+                      className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
+                    >
+                      Categories
+                    </NavLink>
+                  </li>
+
                   <li>
                     <NavLink
                       href="/add-product"
@@ -198,7 +199,7 @@ const NavBar = () => {
               <div className="flex items-center gap-3">
                 <Link href="/login" className="no-underline">
                   <Button className="cursor-pointer border rounded-2xl bg-transparent px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition-all">
-                   Log In
+                    Log In
                   </Button>
                 </Link>
 
@@ -217,11 +218,7 @@ const NavBar = () => {
           <button
             className="cursor-pointer rounded-2xl bg-gray-100/80 p-2.5 text-gray-700 hover:bg-gray-200/80 md:hidden transition-colors border-none"
             onClick={() => setIsMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            aria-label="Open menu">
           </button>
         </div>
       </header>
@@ -243,7 +240,7 @@ const NavBar = () => {
             <div className="flex items-center justify-between pb-5 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  Gadget Mart
+                  Fin<span className="text-indigo-600">Agent</span>
                 </span>
               </div>
               <button
@@ -266,10 +263,6 @@ const NavBar = () => {
                 Browse Products
               </NavLink>
 
-              <NavLink href="/categories" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
-                Categories
-              </NavLink>
-
               <NavLink href="/about-us" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                 About Us
               </NavLink>
@@ -279,6 +272,10 @@ const NavBar = () => {
                   <div className="my-2 border-t border-gray-100" />
                   <NavLink href="/add-product" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                     Add Product
+                  </NavLink>
+
+                  <NavLink href="/categories" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                    Categories
                   </NavLink>
 
                   <NavLink href="/product-manage" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
@@ -332,13 +329,13 @@ const NavBar = () => {
               <div className="flex flex-col gap-2.5">
                 <Link href="/login" onClick={closeMobileMenu} className="no-underline">
                   <Button className="w-full cursor-pointer rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 shadow-sm">
-                   Log In
+                    Log In
                   </Button>
                 </Link>
 
                 <Link href="/signUp" onClick={closeMobileMenu} className="no-underline">
                   <Button className="w-full cursor-pointer rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-100">
-                    Get Started
+                     <p className="flex items-center gap-2">Get Started <FaArrowRight /></p>
                   </Button>
                 </Link>
               </div>

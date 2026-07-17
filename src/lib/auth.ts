@@ -8,7 +8,7 @@ const googleClientId = process.env.GOOGLE_CLIENT_ID!;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET!;
 
 const client = new MongoClient(process.env.MONGODB_URI as string);
-const db = client.db("gadgets_hub");
+const db = client.db("Fin-Agent");
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
