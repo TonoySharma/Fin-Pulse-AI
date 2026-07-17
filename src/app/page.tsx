@@ -1,11 +1,13 @@
 import { Banner } from "@/components/Banner";
 import { Footer } from "@/components/Footer";
-import Image from "next/image";
+import Marquee from "@/components/Marquee";
+
 
 export default function Home() {
   return (
     <div>
       <Banner></Banner>
+      <Marquee></Marquee>
       <Footer></Footer>
     </div>
   );

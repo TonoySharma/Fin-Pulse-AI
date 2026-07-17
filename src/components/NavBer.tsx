@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 
 import { authClient } from "@/lib/auth-client";
 import NavLink from "./NavLink";
+import { FaArrowRight } from "react-icons/fa";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -56,7 +57,8 @@ const NavBar = () => {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden items-center md:flex">
-            <ul className="flex items-center gap-1 rounded-2xl bg-gray-100/70 p-1.5 backdrop-blur-md border border-gray-200/50 list-none m-0 text-sm font-semibold text-gray-600">
+            <ul className="flex items-center gap-1 rounded-xl
+             bg-gray-100/70 p-1.5 backdrop-blur-md border border-gray-200/80 list-none  text-sm font-semibold text-gray-800">
               <li>
                 <NavLink
                   href="/"
@@ -201,8 +203,10 @@ const NavBar = () => {
                 </Link>
 
                 <Link href="/signUp" className="no-underline">
-                  <Button className="cursor-pointer rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-200 hover:shadow-lg hover:shadow-indigo-300 hover:scale-[1.02] active:scale-95 transition-all">
-                    Get Started
+                  <Button className="cursor-pointer rounded-full bg-gradient-to-r from-indigo-600
+                   to-indigo-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-200
+                    hover:shadow-lg hover:shadow-indigo-300 active:scale-95 transition-all">
+                    <p className="flex items-center gap-2">Get Started <FaArrowRight /></p>
                   </Button>
                 </Link>
               </div>
