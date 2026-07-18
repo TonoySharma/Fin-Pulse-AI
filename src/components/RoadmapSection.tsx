@@ -2,6 +2,7 @@
 
 import React from "react";
 import { CheckCircle2, Circle } from "lucide-react";
+import FadeUp from "./FadeUp";
 
 export function RoadmapSection() {
   const steps = [
@@ -11,13 +12,13 @@ export function RoadmapSection() {
   ];
 
   return (
-    <section className="py-24 px-4 max-w-5xl mx-auto bg-slate-950">
-      <div className="text-center space-y-4 mb-20">
+    <section className="py-24 px-4 bg-slate-950">
+      <FadeUp className="text-center space-y-4 mb-20 max-w-5xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">Platform Roadmap</h2>
         <p className="text-sm text-slate-300 font-medium max-w-md mx-auto">Take a look at what we&apos;ve built so far and what is coming up next.</p>
-      </div>
+      </FadeUp>
 
-      <div className="space-y-12 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-slate-800/80">
+      <FadeUp className="max-w-5xl mx-auto space-y-12 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-slate-800/80">
         {steps.map((step, idx) => (
           <div key={idx} className={`flex flex-col sm:flex-row items-start justify-between relative ${idx % 2 === 0 ? "sm:flex-row-reverse" : ""}`}>
             
@@ -42,7 +43,7 @@ export function RoadmapSection() {
             </div>
           </div>
         ))}
-      </div>
+      </FadeUp>
     </section>
   );
 }

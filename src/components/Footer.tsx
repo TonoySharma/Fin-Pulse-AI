@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
-    BsGlobe,
     BsGithub,
     BsLinkedin,
     BsTwitterX,
@@ -11,7 +10,8 @@ import {
     BsTelephoneFill,
     BsGeoAltFill,
     BsCheckCircleFill,
-    BsArrowRight
+    BsArrowRight,
+    BsArrowUpShort // উপরে যাওয়ার আইকনটি ইম্পোর্ট করা হলো
 } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import FadeUp from "./FadeUp";
@@ -19,18 +19,41 @@ import FadeUp from "./FadeUp";
 export const Footer = () => {
     const [email, setEmail] = useState("");
     const [subscribed, setSubscribed] = useState(false);
+    const [showTopBtn, setShowTopBtn] = useState(false);
+
+    // স্ক্রল পজিশন ট্র্যাক করার জন্য useEffect
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 400) {
+                setShowTopBtn(true);
+            } else {
+                setShowTopBtn(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // উপরে স্ক্রল করার ফাংশন
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
         if (email) {
             setSubscribed(true);
             setEmail("");
-            setTimeout(() => setSubscribed(false), 5000); // 5 sec পর মেসেজ রিমুভ হবে
+            setTimeout(() => setSubscribed(false), 5000);
         }
     };
 
     return (
-        <footer className="bg-slate-950 text-slate-300 border-t border-slate-800">
+        <footer className="relative bg-slate-950 text-slate-300 border-t border-slate-800">
             {/* 1. Top Newsletter Bar */}
             <FadeUp className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 ">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-800">
@@ -243,6 +266,19 @@ export const Footer = () => {
                     </div>
                 </div>
             </FadeUp>
+
+            {/* --- Back to Top Button --- */}
+            <button
+                onClick={scrollToTop}
+                className={`fixed bottom-6 right-6 z-50 p-2.5 rounded bg-indigo-600 text-white border
+                     border-indigo-500 shadow-lg shadow-indigo-600/30 transition-all duration-300 hover:bg-indigo-500
+                      ${
+                    showTopBtn ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-4 invisible"
+                }`}
+                aria-label="Back to Top"
+            >
+                <BsArrowUpShort size={24} className="stroke-[0.5]" />
+            </button>
         </footer>
     );
 };

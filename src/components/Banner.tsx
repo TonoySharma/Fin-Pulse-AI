@@ -46,7 +46,7 @@ const slideData = [
     id: 5,
     title: "Real-Time Portfolio Optimization",
     subtitle: "Continuous execution and optimization powered by context-aware LLM agents.",
-    image: "https://images.unsplash.com/photo-1590283603385-fc7ff2073e4b?q=80&w=2560&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=3840&auto=format&fit=crop",
     badge: "Autonomous Agents",
     primaryCta: "Get Started Now",
     ctaLink: "/items/add",
@@ -70,7 +70,7 @@ export const Banner = () => {
   const handlePrev = () => setCurrentSlide((prev) => (prev - 1 + slideData.length) % slideData.length);
 
   return (
-    <section 
+    <section
       className="relative w-full h-screen bg-slate-950 overflow-hidden select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -150,9 +150,8 @@ export const Banner = () => {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              currentSlide === index ? "w-12 bg-white" : "w-4 bg-white/30 hover:bg-white/60"
-            }`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === index ? "w-12 bg-white" : "w-4 bg-white/30 hover:bg-white/60"
+              }`}
           />
         ))}
       </div>

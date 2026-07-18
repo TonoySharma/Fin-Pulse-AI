@@ -10,6 +10,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import { Button } from "@heroui/react";
+import FadeUp from "./FadeUp";
 
 
 export interface FeatureProduct {
@@ -83,7 +84,7 @@ export default function FeaturedCards() {
     <section className="py-20 px-4 space-y-12 bg-slate-950">
 
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-end max-w-7xl mx-auto  justify-between gap-4 border-b border-slate-900 pb-6">
+      <FadeUp className="flex flex-col sm:flex-row items-start sm:items-end max-w-7xl mx-auto  justify-between gap-4 border-b border-slate-900 pb-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
             <TrendingUp size={12} /> Spotlight
@@ -103,10 +104,10 @@ export default function FeaturedCards() {
           View All features
           <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
         </Link>
-      </div>
+      </FadeUp>
 
       {/* 8 Card Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto ">
+      <FadeUp className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto ">
         {products.map((item) => {
           const isExpense = item.type?.toLowerCase() === "expense";
 
@@ -173,7 +174,7 @@ export default function FeaturedCards() {
             </div>
           );
         })}
-      </div>
+      </FadeUp>
 
     </section>
   );

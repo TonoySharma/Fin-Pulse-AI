@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Briefcase, ArrowRight, ChevronDown, Award, ShieldCheck, Zap } from "lucide-react";
+import FadeUp from "./FadeUp";
 
 interface AccordionItem {
   id: number;
@@ -33,7 +34,7 @@ export function HighlightsSection() {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8  bg-slate-950 text-slate-100">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 max-w-7xl mx-auto items-center">
+      <FadeUp className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 max-w-7xl mx-auto items-center">
         
         {/* LEFT COLUMN: Modern Graphic Elements & Image */}
         <div className="lg:col-span-6 flex justify-center items-center relative h-[450px] sm:h-[550px] w-full">
@@ -131,7 +132,7 @@ export function HighlightsSection() {
 
         </div>
 
-      </div>
+      </FadeUp>
     </section>
   );
 }

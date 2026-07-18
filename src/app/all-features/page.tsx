@@ -17,6 +17,10 @@ import {
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import SkeletonCard from "@/components/SkeletonCard";
+import FadeUp from "@/components/FadeUp";
+import ProductFilter from "@/components/ProductFilter";
+import { useSearchParams } from "next/navigation";
+
 
 
 // Data Interface matching your backend structure
@@ -43,32 +47,49 @@ export default function FeaturesPage() {
     const [Features, setFeatures] = useState<FeatureProduct[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const searchParams = useSearchParams();
+
+    const currentPage = Number(searchParams.get("page")) || 1;
+
+    const [totalPages, setTotalPages] = useState(1);
 
 
     useEffect(() => {
         const fetchFeatures = async () => {
             try {
                 setLoading(true);
-                const res = await fetch("http://localhost:8000/api/all-features");
-                if (!res.ok) throw new Error("Failed to fetch data from backend");
+
+                const query = searchParams.toString();
+
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all-features?${query}`
+                );
+
+                if (!res.ok) {
+                    throw new Error("Failed to fetch data");
+                }
 
                 const data = await res.json();
 
-                if (data.success && Array.isArray(data.data)) {
+                if (data.success) {
                     setFeatures(data.data);
-                } else if (Array.isArray(data)) {
-                    setFeatures(data);
+                    setTotalPages(data.pagination.totalPages);
                 }
             } catch (err) {
-                console.error("Fetch error:", err);
-                setError("Failed to load records. Check backend connection.");
+                console.error(err);
+                setError("Failed to load records.");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchFeatures();
-    }, []);
+    }, [searchParams]);
+
+    const pages = Array.from(
+        { length: totalPages },
+        (_, index) => index + 1
+    );
 
     // Helper function to extract Mongo ID safely
     const getItemId = (item: FeatureProduct) => {
@@ -76,11 +97,11 @@ export default function FeaturesPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div className=" bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
-                <div className="text-center space-y-3 max-w-2xl mx-auto">
+                <FadeUp className="text-center space-y-3 max-w-2xl mx-auto">
                     <span className="text-xs font-semibold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
                         Financial Insights
                     </span>
@@ -90,17 +111,13 @@ export default function FeaturesPage() {
                     <p className="text-sm text-slate-400 leading-relaxed">
                         Manage, review, and analyze all your financial transactions powered by AI insights.
                     </p>
-                </div>
+                </FadeUp>
 
-                {/* Error Notification */}
-                {error && (
-                    <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-center text-sm">
-                        {error}
-                    </div>
-                )}
+                {/* search filter */}
+                <ProductFilter></ProductFilter>
 
                 {/* Grid: Desktop 4 Columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <FadeUp className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {loading ? (
                         Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
                     ) : (
@@ -179,9 +196,9 @@ export default function FeaturesPage() {
                                         </div>
 
                                         {/* Modal Trigger Button */}
-                                        <Link href = {`/features/${item._id}`}>
+                                        <Link href={`/features/${item._id}`}>
                                             <Button
-                              
+
                                                 className="w-full mt-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded
                        bg-slate-800 hover:bg-indigo-600 hover:text-white text-slate-200 text-xs 
                        font-bold transition-all duration-300 shadow-md group/btn"
@@ -197,8 +214,54 @@ export default function FeaturesPage() {
                             );
                         })
                     )}
-                </div>
+                </FadeUp>
             </div>
+            {/* Pagination */}
+            <FadeUp className="flex justify-center items-center gap-2 mt-10 flex-wrap">
+
+                <Link
+                    href={`/all-features?${new URLSearchParams({
+                        ...Object.fromEntries(searchParams.entries()),
+                        page: String(currentPage - 1),
+                    }).toString()}`}
+                    className={`px-4 py-2 rounded-lg border border-slate-700 ${currentPage === 1
+                            ? "pointer-events-none opacity-40"
+                            : "hover:bg-indigo-600"
+                        }`}
+                >
+                    Prev
+                </Link>
+
+                {pages.map((page) => (
+                    <Link
+                        key={page}
+                        href={`/all-features?${new URLSearchParams({
+                            ...Object.fromEntries(searchParams.entries()),
+                            page: String(page),
+                        }).toString()}`}
+                        className={`px-4 py-2 rounded-lg border ${currentPage === page
+                                ? "bg-indigo-600 text-white"
+                                : "border-slate-700 hover:bg-slate-800"
+                            }`}
+                    >
+                        {page}
+                    </Link>
+                ))}
+
+                <Link
+                    href={`/all-features?${new URLSearchParams({
+                        ...Object.fromEntries(searchParams.entries()),
+                        page: String(currentPage + 1),
+                    }).toString()}`}
+                    className={`px-4 py-2 rounded-lg border border-slate-700 ${currentPage === totalPages
+                            ? "pointer-events-none opacity-40"
+                            : "hover:bg-indigo-600"
+                        }`}
+                >
+                    Next
+                </Link>
+
+            </FadeUp>
         </div>
     );
 }

@@ -15,3 +15,12 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+html.lenis, html.lenis body {
+  height: auto !important;
+}
+
+.lenis-smooth {
+ 
+  scroll-behavior: auto !important; 
+}

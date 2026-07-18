@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Check, ArrowRight } from "lucide-react";
+import FadeUp from "./FadeUp";
 
 interface PricingPlan {
   title: string;
@@ -61,7 +62,7 @@ export function PricingSection() {
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-emerald-500/5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Section Header */}
-      <div className="text-center space-y-4 mb-16 max-w-7xl mx-auto">
+      <FadeUp className="text-center space-y-4 mb-16 max-w-7xl mx-auto">
         <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
           Pricing action
         </span>
@@ -69,10 +70,10 @@ export function PricingSection() {
           Stay ahead of the competition <br className="hidden sm:block" />
           with AI <span className="text-emerald-400 bg-clip-text">intelligence</span>
         </h2>
-      </div>
+      </FadeUp>
 
       {/* 3 Column Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+      <FadeUp className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
         {plans.map((plan, idx) => (
           <div
             key={idx}
@@ -147,7 +148,7 @@ export function PricingSection() {
             </div>
           </div>
         ))}
-      </div>
+      </FadeUp>
     </section>
   );
 }

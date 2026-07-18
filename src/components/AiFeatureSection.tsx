@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Sparkles, TrendingDown, ArrowRight, Wallet } from "lucide-react";
+import FadeUp from "./FadeUp";
 
 export function AiFeatureSection() {
   return (
@@ -12,7 +13,7 @@ export function AiFeatureSection() {
       <div className="max-w-7xl mx-auto  grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-slate-900/30 border border-slate-800/80 rounded-[2.5rem] p-8 sm:p-14 backdrop-blur-md shadow-2xl">
         
         {/* Left Content */}
-        <div className="lg:col-span-5 space-y-6">
+        <FadeUp className="lg:col-span-5 space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
             <Sparkles size={12} className="animate-pulse" /> AI Powered System
           </div>
@@ -27,10 +28,10 @@ export function AiFeatureSection() {
               <span>Try AI Scanner</span> <ArrowRight size={14} className="stroke-[2.5]" />
             </button>
           </div>
-        </div>
+        </FadeUp>
 
         {/* Right Feature Cards */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+        <FadeUp className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
           <div className="bg-slate-950/80 border border-slate-800 p-7 rounded-2xl space-y-4 hover:border-slate-700 transition-all duration-300 group shadow-xl">
             <div className="p-2.5 w-fit rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <Wallet size={20}/>
@@ -46,7 +47,7 @@ export function AiFeatureSection() {
             <h4 className="text-base font-bold text-white group-hover:text-rose-400 transition-colors">Waste Detection</h4>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">Flags unused SaaS subscriptions or double bookings automatically within minutes.</p>
           </div>
-        </div>
+        </FadeUp>
 
       </div>
     </section>

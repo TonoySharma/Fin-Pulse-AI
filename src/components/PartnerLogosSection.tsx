@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Cpu, Globe, Layers, Shapes, Terminal, Zap } from "lucide-react";
+import FadeUp from "./FadeUp";
 
 export function PartnerLogosSection() {
   const partners = [
@@ -15,7 +16,7 @@ export function PartnerLogosSection() {
 
   return (
     <section className="py-16 border-y border-slate-900 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-4 text-center space-y-8">
+      <FadeUp className="max-w-7xl mx-auto px-4 text-center space-y-8">
         <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">
           Trusted by fast-growing teams worldwide
         </p>
@@ -32,7 +33,7 @@ export function PartnerLogosSection() {
             </div>
           ))}
         </div>
-      </div>
+      </FadeUp>
     </section>
   );
 }
