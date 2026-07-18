@@ -161,7 +161,7 @@ export default function FeaturedCards() {
 
                     className="w-full mt-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded
                        bg-slate-800 hover:bg-indigo-600 hover:text-white text-slate-200 text-xs 
-                       font-bold transition-all duration-300 shadow-md group/btn"
+                       font-bold transition-all duration-300"
                   >
                     <span>View Details</span>
                     <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
