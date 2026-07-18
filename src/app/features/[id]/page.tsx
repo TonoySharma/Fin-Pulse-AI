@@ -120,7 +120,8 @@ export default function DetailsPage() {
                 <AlertCircle size={48} className="text-red-400" />
                 <h2 className="text-xl font-bold">Record Not Found</h2>
                 <p className="text-sm text-slate-400 max-w-md">{error || "The requested item does not exist."}</p>
-                <Link href="/features" className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl transition-colors">
+                <Link href="/all-features" className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white
+                 px-4 py-2 rounded-xl transition-colors">
                     Back to Listing
                 </Link>
             </div>
@@ -137,7 +138,7 @@ export default function DetailsPage() {
                 {/* Navigation */}
                 <div className="flex items-center justify-between">
                     <Link
-                        href="/features"
+                        href="/all-features"
                         className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-800"
                     >
                         <ArrowLeft size={16} /> Back to Records
@@ -357,7 +358,8 @@ export default function DetailsPage() {
                             <h3 className="text-base font-bold text-white">Confirm Payment / Process</h3>
                             <Button
                                 onClick={() => setIsModalOpen(false)}
-                                className="text-slate-400 hover:text-white text-sm bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center">
+                                className="text-slate-400 hover:text-white text-sm
+                                 bg-slate-800 w-7 h-7 rounded-full flex items-center justify-center">
                                 ✕
                             </Button>
                         </div>
@@ -374,8 +376,9 @@ export default function DetailsPage() {
 
                         <Button
                             onClick={handleConfirmAndPay}
-                            disabled={isProcessing} // প্রসেসিং চলাকালীন ক্লিক ব্লক থাকবে
-                            className={`w-full py-3.5 rounded-xl bg-indigo-600 font-bold text-xs text-white transition-all shadow-lg flex items-center justify-center gap-2 ${isProcessing
+                            isDisabled={isProcessing} 
+                            className={`w-full py-3.5 rounded bg-indigo-600 font-bold text-xs
+                                 text-white transition-all shadow-lg flex items-center justify-center gap-2 ${isProcessing
                                     ? "opacity-75 cursor-not-allowed bg-indigo-700"
                                     : "hover:bg-indigo-500 active:scale-95"
                                 }`}
