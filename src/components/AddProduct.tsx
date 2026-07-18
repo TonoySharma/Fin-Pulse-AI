@@ -29,7 +29,7 @@ interface FormData {
   location: string;
 }
 
-export default function ExpenseForm() {
+export default function ProductForm() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
@@ -83,9 +83,9 @@ export default function ExpenseForm() {
         const imgBbFormData = new FormData();
         imgBbFormData.append("image", imageFile);
 
-    
-        const imgBbKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY; 
-        
+
+        const imgBbKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+
         const imgBbResponse = await fetch(
           `https://api.imgbb.com/1/upload?key=${imgBbKey}`,
           {
@@ -103,7 +103,7 @@ export default function ExpenseForm() {
         }
       }
 
-    
+
       const { data: token } = await authClient.token();
 
       const response = await fetch(
@@ -116,7 +116,7 @@ export default function ExpenseForm() {
           },
           body: JSON.stringify({
             ...formData,
-            image: imageUrl, 
+            image: imageUrl,
             currency: "BDT",
             status: "Completed",
             rating: 0,
@@ -138,8 +138,8 @@ export default function ExpenseForm() {
           priority: "Medium",
           location: "",
         });
-        setImageFile(null); 
-     
+        setImageFile(null);
+
         const fileInput = document.getElementById("image-upload") as HTMLInputElement;
         if (fileInput) fileInput.value = "";
       } else {
@@ -154,9 +154,18 @@ export default function ExpenseForm() {
   };
 
   if (isPending) {
-    return <div className="text-center mt-20">Loading...</div>;
-  }
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
+      
+        <div className="w-10 h-10 border-4 border-blue-500/20 border-t-blue-600 rounded-full animate-spin" />
 
+   
+        <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400 animate-pulse tracking-wide">
+          Checking authentication...
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white dark:bg-zinc-900 rounded-xl shadow-md border">
       <FadeUp>
@@ -290,7 +299,7 @@ export default function ExpenseForm() {
             </div>
           </div>
 
-    
+
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium">Upload Receipt / Image (Optional)</label>
             <div className="relative">
