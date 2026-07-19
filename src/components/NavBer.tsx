@@ -39,11 +39,15 @@ const NavBar = () => {
           {/* Glassmorphic Floating Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 no-underline transition-all duration-300 hover:scale-[1.02] active:scale-95"
+            className="group flex items-center gap-2.5 no-underline transition-all duration-300 active:scale-95"
           >
-            <div className="flex items-center gap-2.5 rounded-2xl border border-gray-200/60 bg-white/60 p-2 pr-4 shadow-[0_2px_10px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all group-hover:border-indigo-300 group-hover:bg-white/90 group-hover:shadow-md">
+            <div className="flex items-center gap-2.5 rounded-xl border border-gray-200 border-dashed bg-white/60 p-2 pr-4
+             shadow-[0_2px_10px_rgba(0,0,0,0.04)] backdrop-blur-md transition-all group-hover:border-indigo-300
+              group-hover:bg-white/90">
               {/* Icon with Soft Gradient Glow */}
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 font-black text-white shadow-sm shadow-indigo-200 transition-transform duration-300 group-hover:rotate-6">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600
+               via-indigo-500 to-purple-600 font-black text-white shadow-sm shadow-indigo-200 transition-transform
+                duration-300 group-hover:rotate-6">
                 F
               </div>
 
@@ -90,15 +94,6 @@ const NavBar = () => {
               {session && user && (
                 <>
                   <div className="h-4 w-[1px] bg-gray-300/60 mx-1" />
-                  {/* <li>
-                    <NavLink
-                      href="/categories"
-                      className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
-                    >
-                      Categories
-                    </NavLink>
-                  </li> */}
-
                   <li>
                     <NavLink
                       href="/add-product"
@@ -117,6 +112,15 @@ const NavBar = () => {
                       Manage Features
                     </NavLink>
                   </li>
+
+                  {/* <li>
+                    <NavLink
+                      href="/ai-recommendation"
+                      className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
+                    >
+                      AI Recommendation
+                    </NavLink>
+                  </li> */}
                 </>
               )}
             </ul>
@@ -281,12 +285,16 @@ const NavBar = () => {
 
                   </NavLink>
 
-            
 
-                  <NavLink href="/product-manage" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+
+                  <NavLink href="/ai-recommendation" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                     Manage Features
 
                   </NavLink>
+                  {/* <NavLink href="/product-manage" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                    AI Recommendation
+
+                  </NavLink> */}
 
                   <NavLink href="/#" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                     My Orders

@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import NavBar from "@/components/NavBer";
 import Smooth from "@/components/Smooth";
 import GlowEffect from "@/components/GlowEffect";
+import AIChatAssistant from "@/components/AIChatAssistant";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +35,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <NavBar></NavBar>
         <Smooth>
+          <AIChatAssistant />
           <GlowEffect />
           <main>{children}</main>
+
         </Smooth>
         <Toaster />
       </body>

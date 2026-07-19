@@ -76,7 +76,7 @@ export default function ProfilePage() {
     const user = session?.user;
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
+        <div className=" h-[830px] bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto space-y-8">
 
                 {/* Top Header Card */}

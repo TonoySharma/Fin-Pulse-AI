@@ -13,7 +13,7 @@ const slideData = [
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2560&auto=format&fit=crop",
     badge: "Agentic AI v2.4 Active",
     primaryCta: "Start Free Trial",
-    ctaLink: "/dashboard",
+    ctaLink: "/#",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const slideData = [
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2560&auto=format&fit=crop",
     badge: "Smart Analytics",
     primaryCta: "Analyze Data",
-    ctaLink: "/dashboard/ai-analyzer",
+    ctaLink: "/#",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const slideData = [
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2560&auto=format&fit=crop",
     badge: "Strategic Planning",
     primaryCta: "Generate Plan",
-    ctaLink: "/dashboard/ai-planner",
+    ctaLink: "/#",
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ const slideData = [
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2560&auto=format&fit=crop",
     badge: "Bank-Level Security",
     primaryCta: "Explore Features",
-    ctaLink: "/explore",
+    ctaLink: "/#",
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const slideData = [
     image: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=3840&auto=format&fit=crop",
     badge: "Autonomous Agents",
     primaryCta: "Get Started Now",
-    ctaLink: "/items/add",
+    ctaLink: "/#",
   },
 ];
 
