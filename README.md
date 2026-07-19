@@ -4,7 +4,7 @@ An AI-powered Personal Finance Management Platform that helps users manage finan
 explore smart financial features, and interact with an intelligent AI assistant for personalized guidance.
 
 
-🌐 Live Website:
+🌐 Live Website:https://fin-pulse-ai-ashen.vercel.app/
 
 📖 Project Overview
 
