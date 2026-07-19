@@ -1,6 +1,6 @@
-
 import ProductForm from '@/components/AddProduct';
 import { Metadata } from 'next';
+
 export const metadata: Metadata = {
     title: "Add New Card",
     

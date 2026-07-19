@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { authClient, useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import { Button } from "@heroui/react";
 
 
 export default function ProfilePage() {
@@ -246,15 +247,15 @@ export default function ProfilePage() {
                             <p className="text-xs text-slate-400 mb-4">
                                 Want to switch accounts or safely exit? Log out of your session anytime.
                             </p>
-                            <button
+                            <Button
                                 onClick={handleLogout}
                                 className="w-full flex items-center justify-center gap-2 py-2.5 px-4
                                  rounded bg-red-500/10 text-red-400 border border-red-500/20
                                   hover:bg-red-500 hover:text-white font-medium text-sm transition-all
-                                   shadow-lg shadow-red-500/5 cursor-pointer"
+                                   shadow-lg shadow-red-500/5 cursor-pointer duration-300"
                             >
                                 <LogOut size={16} /> Log Out Account
-                            </button>
+                            </Button>
                         </div>
                     </div>
 

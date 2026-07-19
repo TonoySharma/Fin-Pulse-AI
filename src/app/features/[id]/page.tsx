@@ -141,7 +141,9 @@ export default function DetailsPage() {
                         href="/all-features"
                         className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-800"
                     >
-                        <ArrowLeft size={16} /> Back to Records
+                        <ArrowLeft size={16} />
+                         Back to
+                        Features
                     </Link>
 
                     <div className="flex items-center gap-3">
@@ -376,7 +378,7 @@ export default function DetailsPage() {
 
                         <Button
                             onClick={handleConfirmAndPay}
-                            isDisabled={isProcessing} 
+                            isDisabled={isProcessing}
                             className={`w-full py-3.5 rounded bg-indigo-600 font-bold text-xs
                                  text-white transition-all shadow-lg flex items-center justify-center gap-2 ${isProcessing
                                     ? "opacity-75 cursor-not-allowed bg-indigo-700"
@@ -385,7 +387,7 @@ export default function DetailsPage() {
                         >
                             {isProcessing ? (
                                 <>
-                                 
+
                                     <Loader2 className="w-4 h-4 animate-spin text-white" />
                                     <span>Processing...</span>
                                 </>

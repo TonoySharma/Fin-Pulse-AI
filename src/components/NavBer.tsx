@@ -90,21 +90,22 @@ const NavBar = () => {
               {session && user && (
                 <>
                   <div className="h-4 w-[1px] bg-gray-300/60 mx-1" />
-                  <li>
+                  {/* <li>
                     <NavLink
                       href="/categories"
                       className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                     >
                       Categories
                     </NavLink>
-                  </li>
+                  </li> */}
 
                   <li>
                     <NavLink
                       href="/add-product"
                       className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                     >
-                      Add Product
+                      Add Feature
+
                     </NavLink>
                   </li>
 
@@ -113,7 +114,7 @@ const NavBar = () => {
                       href="/product-manage"
                       className="relative block rounded-xl px-4 py-2 transition-all duration-200 hover:text-indigo-600 no-underline"
                     >
-                      Manage
+                      Manage Features
                     </NavLink>
                   </li>
                 </>
@@ -176,7 +177,7 @@ const NavBar = () => {
                     </Link>
 
                     <Link
-                      href="/orders"
+                      href="/#"
                       className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-indigo-50 hover:text-indigo-600 no-underline"
                     >
                       <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -276,18 +277,18 @@ const NavBar = () => {
                 <>
                   <div className="my-2 border-t border-gray-100" />
                   <NavLink href="/add-product" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
-                    Add Product
+                    Add Feature
+
                   </NavLink>
 
-                  <NavLink href="/categories" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
-                    Categories
-                  </NavLink>
+            
 
                   <NavLink href="/product-manage" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
-                    Manage Products
+                    Manage Features
+
                   </NavLink>
 
-                  <NavLink href="/orders" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                  <NavLink href="/#" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                     My Orders
                   </NavLink>
 

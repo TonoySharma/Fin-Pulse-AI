@@ -155,7 +155,7 @@ export default function ProductForm() {
 
   if (isPending) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
+      <FadeUp className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
       
         <div className="w-10 h-10 border-4 border-blue-500/20 border-t-blue-600 rounded-full animate-spin" />
 
@@ -163,7 +163,7 @@ export default function ProductForm() {
         <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400 animate-pulse tracking-wide">
           Checking authentication...
         </p>
-      </div>
+      </FadeUp>
     );
   }
   return (
