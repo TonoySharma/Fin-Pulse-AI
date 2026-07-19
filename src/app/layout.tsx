@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FinAgent - AI-Powered Financial Intelligence & Expense Tracker",
+  title: "FinPulse AI - AI-Powered Financial Intelligence & Expense Tracker",
   description: "Next-generation Agentic AI platform designed to transform personal and business financial management through automated analysis and smart insights.",
 };
 

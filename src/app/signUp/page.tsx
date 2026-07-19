@@ -2,8 +2,9 @@ import RegisterPage from '@/components/SignUoSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Create an Account",
-    description: "Join My Gadget Hub today. Register now to unlock premium member benefits, faster checkout, and exclusive gadget deals.",
+  title: "Sign Up | FinPulse AI",
+  description:
+    "Join FinPulse AI to manage your finances smarter with AI-powered expense tracking and financial insights.",
 };
 
 

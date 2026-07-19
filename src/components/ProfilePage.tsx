@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
-
 import {
     User,
     Mail,
@@ -24,9 +22,7 @@ import { authClient, useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { Button } from "@heroui/react";
 
-
 export default function ProfilePage() {
-
     const handleLogout = async () => {
         const { error } = await authClient.signOut();
 
@@ -38,7 +34,6 @@ export default function ProfilePage() {
         toast.success("Logged out successfully!");
         window.location.replace("/login");
     };
-
 
     const { data: session, isPending } = useSession();
 
@@ -52,43 +47,42 @@ export default function ProfilePage() {
         return () => clearInterval(timer);
     }, []);
 
-
     if (isPending) {
         return (
-            <div className="min-h-screen bg-slate-950 flex items-center justify-center text-cyan-400">
+            <div className="min-h-screen bg-slate-950 flex items-center justify-center text-cyan-400 p-4">
                 <Loader2 size={32} className="animate-spin" />
                 <span className="ml-2 font-medium">Loading profile...</span>
             </div>
         );
     }
 
-
     if (!session || !session.user) {
         return (
-            <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-300">
+            <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-300 p-4 text-center">
                 <h2 className="text-2xl font-bold text-white mb-2">You are not logged in!</h2>
                 <p className="text-slate-400 mb-4 text-sm">Please log in to view your profile page.</p>
             </div>
         );
     }
 
-
     const user = session?.user;
 
     return (
-        <div className=" h-[830px] bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto space-y-8">
+        // FIXED: Replaced rigid h-[830px] with min-h-screen to let content expand naturally
+        <div className="min-h-screen bg-slate-950 text-slate-100 py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
 
                 {/* Top Header Card */}
-                <div className="relative overflow-hidden rounded-3xl bg-slate-900/80 border border-slate-800 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
+                <div className="relative overflow-hidden rounded-3xl bg-slate-900/80 border border-slate-800 p-5 sm:p-8 backdrop-blur-xl shadow-2xl">
                     <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
                     <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+                    {/* FIXED: Improved flex and grouping behaviors on small screen viewports */}
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+                        
                         {/* User Avatar & Basic Info */}
                         <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-                            <div className="relative group">
-
+                            <div className="relative group flex-shrink-0">
                                 {user.image ? (
                                     <img
                                         src={user.image}
@@ -105,20 +99,18 @@ export default function ProfilePage() {
                                 </button>
                             </div>
 
-                            <div className="space-y-1">
-                                <div className="flex items-center justify-center sm:justify-start gap-2">
-
-                                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                            <div className="space-y-2 min-w-0 w-full">
+                                <div className="flex flex-col sm:flex-row items-center sm:justify-start gap-2 flex-wrap">
+                                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white truncate max-w-full">
                                         {user.name || "Anonymous User"}
                                     </h1>
-                                    <span className="inline-flex items-center gap-1 text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-medium">
+                                    <span className="inline-flex items-center gap-1 text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-medium whitespace-nowrap">
                                         <Award size={12} /> Verified Member
                                     </span>
                                 </div>
 
-
-                                <p className="flex items-center justify-center sm:justify-start gap-2 text-slate-400 text-sm">
-                                    <Mail size={15} className="text-cyan-400" />
+                                <p className="flex items-center justify-center sm:justify-start gap-2 text-slate-400 text-sm break-all">
+                                    <Mail size={15} className="text-cyan-400 flex-shrink-0" />
                                     {user.email || "No email available"}
                                 </p>
 
@@ -129,38 +121,41 @@ export default function ProfilePage() {
                         </div>
 
                         {/* Date & Live Time Widget */}
-                        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3 bg-slate-950/60 p-4 rounded-2xl border border-slate-800/80 backdrop-blur-md justify-center items-center">
-                            <div className="flex items-center gap-3 px-3 py-1.5">
-                                <div className="p-2 bg-slate-900 rounded-lg text-cyan-400 border border-slate-800">
+                        {/* FIXED: Changed to stack evenly on mobile, grid on tablets, flex on larger views */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-3 bg-slate-950/60 p-3 sm:p-4 rounded-2xl border border-slate-800/80 backdrop-blur-md justify-center items-center w-full lg:w-auto">
+                            <div className="flex items-center gap-3 px-3 py-1.5 w-full justify-center sm:justify-start">
+                                <div className="p-2 bg-slate-900 rounded-lg text-cyan-400 border border-slate-800 flex-shrink-0">
                                     <Calendar size={18} />
                                 </div>
                                 <div>
                                     <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Today&apos;s Date</p>
-                                    <p className="text-sm font-medium text-slate-200">
+                                    <p className="text-sm font-medium text-slate-200 whitespace-nowrap">
                                         {dateTime ? dateTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "--"}
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="hidden sm:block md:hidden lg:block w-px h-8 bg-slate-800" />
+                            <div className="hidden lg:block w-px h-8 bg-slate-800" />
 
-                            <div className="flex items-center gap-3 px-3 py-1.5">
-                                <div className="p-2 bg-slate-900 rounded-lg text-cyan-400 border border-slate-800">
+                            <div className="flex items-center gap-3 px-3 py-1.5 w-full justify-center sm:justify-start border-t border-slate-800/60 sm:border-t-0 sm:border-l sm:border-slate-800/60 lg:border-l-0">
+                                <div className="p-2 bg-slate-900 rounded-lg text-cyan-400 border border-slate-800 flex-shrink-0">
                                     <Clock size={18} />
                                 </div>
                                 <div>
                                     <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Live Time</p>
-                                    <p className="text-sm font-mono font-bold text-cyan-400">
+                                    <p className="text-sm font-mono font-bold text-cyan-400 whitespace-nowrap">
                                         {dateTime ? dateTime.toLocaleTimeString() : "--:--:--"}
                                     </p>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* FIXED: Upgraded layout steps: 1 col (very mobile) -> 2 cols (mobile/tablet) -> 4 cols (desktop) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {[
                         { label: "Total Orders", value: "18", icon: ShoppingBag, color: "text-blue-400", bg: "bg-blue-500/10" },
                         { label: "Wishlist Items", value: "12", icon: Heart, color: "text-pink-400", bg: "bg-pink-500/10" },
@@ -168,7 +163,7 @@ export default function ProfilePage() {
                         { label: "Saved Addresses", value: "2", icon: MapPin, color: "text-amber-400", bg: "bg-amber-500/10" },
                     ].map((stat, i) => (
                         <div key={i} className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-5 flex items-center gap-4 hover:border-slate-700 transition-all">
-                            <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
+                            <div className={`p-3 rounded-xl ${stat.bg} ${stat.color} flex-shrink-0`}>
                                 <stat.icon size={22} />
                             </div>
                             <div>
@@ -180,7 +175,7 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Main Content Sections */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
 
                     {/* Quick Settings & Navigation */}
                     <div className="lg:col-span-2 space-y-4">
@@ -195,19 +190,21 @@ export default function ProfilePage() {
                                 { title: "Security & Password", desc: "Manage 2FA, password, and active sessions", icon: ShieldCheck, action: "Manage" },
                                 { title: "Notification Preferences", desc: "Control email alerts and SMS notifications", icon: Bell, action: "Configure" },
                             ].map((item, index) => (
-                                <div key={index} className="p-4 sm:p-5 flex items-center justify-between hover:bg-slate-800/30 transition-colors group cursor-pointer">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-2.5 rounded-xl bg-slate-800/80 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
+                                <div key={index} className="p-4 sm:p-5 flex items-center justify-between hover:bg-slate-800/30 transition-colors group cursor-pointer gap-4">
+                                    <div className="flex items-center gap-4 min-w-0">
+                                        <div className="p-2.5 rounded-xl bg-slate-800/80 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors flex-shrink-0">
                                             <item.icon size={20} />
                                         </div>
-                                        <div>
-                                            <h3 className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors">
+                                        <div className="min-w-0">
+                                            <h3 className="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors truncate">
                                                 {item.title}
                                             </h3>
-                                            <p className="text-xs text-slate-400 mt-0.5">{item.desc}</p>
+                                            <p className="text-xs text-slate-400 mt-0.5 truncate sm:whitespace-normal sm:overflow-visible">
+                                                {item.desc}
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2 text-xs text-cyan-400 font-medium">
+                                    <div className="flex items-center gap-2 text-xs text-cyan-400 font-medium flex-shrink-0">
                                         <span className="hidden sm:inline">{item.action}</span>
                                         <ChevronRight size={16} className="text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
                                     </div>
@@ -224,21 +221,21 @@ export default function ProfilePage() {
 
                         {/* Account Status Card */}
                         <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 space-y-4">
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between gap-2">
                                 <span className="text-xs text-slate-400">Email Verification</span>
-                                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
                                     Verified
                                 </span>
                             </div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between gap-2">
                                 <span className="text-xs text-slate-400">Two-Factor Auth (2FA)</span>
-                                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 whitespace-nowrap">
                                     Disabled
                                 </span>
                             </div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-between gap-2">
                                 <span className="text-xs text-slate-400">Account Type</span>
-                                <span className="text-xs font-semibold text-white">VIP Buyer</span>
+                                <span className="text-xs font-semibold text-white whitespace-nowrap">VIP Buyer</span>
                             </div>
                         </div>
 

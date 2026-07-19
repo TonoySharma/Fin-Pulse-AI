@@ -54,7 +54,7 @@ const NavBar = () => {
               {/* Brand Name */}
               <div className="flex flex-col">
                 <span className="text-base font-extrabold tracking-tight text-gray-900 group-hover:text-indigo-600 transition-colors">
-                  Fin<span className="text-indigo-600">Agent</span>
+                  FinPulse<span className="text-indigo-600"> AI</span>
                 </span>
               </div>
             </div>
@@ -250,7 +250,7 @@ const NavBar = () => {
             <div className="flex items-center justify-between pb-5 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  Fin Agent
+                  FinPulse AI
                 </span>
               </div>
               <button
@@ -269,8 +269,8 @@ const NavBar = () => {
                 Home
               </NavLink>
 
-              <NavLink href="/browse-products" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
-                Browse Products
+              <NavLink href="/all-features" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                Features
               </NavLink>
 
               <NavLink href="/about-us" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
@@ -287,7 +287,7 @@ const NavBar = () => {
 
 
 
-                  <NavLink href="/ai-recommendation" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
+                  <NavLink href="/product-manage" onClick={closeMobileMenu} className="block rounded-2xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all no-underline">
                     Manage Features
 
                   </NavLink>

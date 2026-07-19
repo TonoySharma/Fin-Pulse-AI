@@ -1,7 +1,14 @@
 import FadeUp from '@/components/FadeUp';
+import { Metadata } from 'next';
 import { BsCpu, BsShieldCheck, BsGraphUpArrow, BsLightningCharge } from 'react-icons/bs';
 import { BsCloudUpload, BsCodeSquare, BsPieChart } from 'react-icons/bs';
 import { BsLock, BsRepeat, BsJournalCheck, BsShare } from 'react-icons/bs';
+
+export const metadata: Metadata = {
+    title: "About Us | FinPulse AI",
+    description:
+        "Learn more about FinPulse AI, an intelligent financial management platform that helps you track expenses, manage transactions, and make smarter financial decisions with AI-powered insights.",
+}
 
 export default function AboutPage() {
     return (

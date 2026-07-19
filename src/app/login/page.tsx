@@ -2,8 +2,9 @@ import LoginPage from '@/components/LogInSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Login to Your Account",
-  description: "Sign in to My Gadget Hub securely to manage your orders, wishlist, and personalized tech feed.",
+    title: "Login | FinPulse AI",
+    description:
+        "Securely log in to FinPulse AI and manage your finances with smart AI-powered tools and insights.",
 };
 
 

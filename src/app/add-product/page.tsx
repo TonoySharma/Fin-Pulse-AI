@@ -1,9 +1,10 @@
 import ProductForm from '@/components/AddProduct';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Add New Card",
-    
+    title: "Add New Card | FinPulse AI",
+    description:
+        "Add a new payment card to your FinPulse AI account and manage your financial transactions securely.",
 };
 
 const AddProductPage = () => {
