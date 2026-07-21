@@ -38,7 +38,7 @@ export default function FeaturedCards() {
       try {
         setLoading(true);
 
-        const res = await fetch("http://localhost:8000/api/features");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/features`);
         const result = await res.json();
 
         if (res.ok && result.success) {

@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import { Sparkles, TrendingDown, ArrowRight, Wallet } from "lucide-react";
 import FadeUp from "./FadeUp";
 
